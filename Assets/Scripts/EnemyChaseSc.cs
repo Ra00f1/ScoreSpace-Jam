@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyChaseSc : MonoBehaviour
 {
-    public Transform Player;
+    public GameObject PLayerGO;
+
+    private Transform Player;
 
     public float moveSpeed = 5f;
 
@@ -18,12 +20,14 @@ public class EnemyChaseSc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PLayerGO = GameObject.FindGameObjectWithTag("Player");
         rb = this.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Player = PLayerGO.transform;
         Vector3 direction = Player.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
