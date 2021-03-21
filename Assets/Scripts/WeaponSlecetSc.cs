@@ -28,11 +28,13 @@ public class WeaponSlecetSc : MonoBehaviour
             Destroy(CurrentWeapon);
             if (CurrentWeapon == null)
             {
-                Instantiate(Pistol, WeaponSpwanPoint.position, Quaternion.identity);
+                CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, Quaternion.identity);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
             }
             else
             {
-                Instantiate(Pistol, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
             }
         }
 
@@ -41,11 +43,13 @@ public class WeaponSlecetSc : MonoBehaviour
             Destroy(CurrentWeapon);
             if (CurrentWeapon == null)
             {
-                Instantiate(Uzi, WeaponSpwanPoint.position, Quaternion.identity);
+                CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, Quaternion.identity);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
             }
             else
             {
-                Instantiate(Uzi, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
             }
 
 
@@ -54,13 +58,18 @@ public class WeaponSlecetSc : MonoBehaviour
                 Destroy(CurrentWeapon);
                 if (CurrentWeapon == null)
                 {
-                    Instantiate(Shotgun, WeaponSpwanPoint.position, Quaternion.identity);
+                    CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, Quaternion.identity);
+                    CurrentWeapon.transform.SetParent(gameObject.transform);
                 }
                 else
                 {
-                    Instantiate(Shotgun, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                    CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                    CurrentWeapon.transform.SetParent(gameObject.transform);
                 }
             }
+
+            CurrentWeapon.transform.SetParent(gameObject.transform);
+
             if (CurrentWeapon != null)
             {
                 CurrentWeapon.transform.SetParent(gameObject.transform);

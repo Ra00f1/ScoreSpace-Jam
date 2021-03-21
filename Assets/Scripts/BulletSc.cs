@@ -10,20 +10,22 @@ public class BulletSc : MonoBehaviour
 
     public BoxCollider2D coll;
 
+    public int Damage;
+
     void Update()
     {
         rb.velocity = transform.right * Speed;
-        Debug.Log("Uzi B Start");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
-        Destroy(collision.gameObject);
+        collision.GetComponent<EnemyStats>().GetDamage(Damage);
     }
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
     }
+
 }

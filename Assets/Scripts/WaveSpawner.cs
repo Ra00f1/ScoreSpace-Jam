@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class WaveSpawner : MonoBehaviour
 	public class Wave
 	{
 		public string name;
-		public Transform enemy;
-		public int count;
+		public Transform[] enemy;
+		public int[] count;
+		public List<int> count2;
 		public float rate;
 	}
 
@@ -101,13 +103,20 @@ public class WaveSpawner : MonoBehaviour
 
 	IEnumerator SpawnWave(Wave _wave)
 	{
-		//Debug.Log("Spawning Wave: " + _wave.name);
 		state = SpawnState.SPAWNING;
-
-		for (int i = 0; i < _wave.count; i++)
+		for (int i = 0; i < _wave.count.Length; i++)
 		{
-			SpawnEnemy(_wave.enemy);
-			yield return new WaitForSeconds(1f / _wave.rate);
+			int tempenemytype = i;
+
+			if (i == _wave.count.Length)
+			{
+			}
+
+				for (int x = 0; x < _wave.count[tempenemytype]; x++)
+			{
+				SpawnEnemy(_wave.enemy[tempenemytype]);
+				yield return new WaitForSeconds(1f / _wave.rate);
+			}
 		}
 
 		state = SpawnState.WAITING;
@@ -117,8 +126,6 @@ public class WaveSpawner : MonoBehaviour
 
 	void SpawnEnemy(Transform _enemy)
 	{
-		//Debug.Log("Spawning Enemy: " + _enemy.name);
-
 		Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 		Instantiate(_enemy, _sp.position, _sp.rotation);
 	}
