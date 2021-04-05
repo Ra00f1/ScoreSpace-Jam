@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
 	public enum SpawnState { SPAWNING, WAITING, COUNTING };
+
+	public bool completed = false;
+
+	public GameObject CompletedText;
+	public GameObject WaveText;
 
 	[System.Serializable]
 	public class Wave
@@ -21,6 +27,7 @@ public class WaveSpawner : MonoBehaviour
 	public int NextWave
 	{
 		get { return nextWave + 1; }
+
 	}
 
 	public Transform[] spawnPoints;
@@ -42,16 +49,20 @@ public class WaveSpawner : MonoBehaviour
 
 	void Start()
 	{
+		CompletedText.active = false;
+		WaveText.active = false;
 		waveCountdown = timeBetweenWaves;
 	}
 
 	void Update()
 	{
+		//if(CompletedAnimator.GetCurrentAnimatorStateInfo.)
 		if (state == SpawnState.WAITING)
 		{
 			if (!EnemyIsAlive())
 			{
 				WaveCompleted();
+				completed = true;
 			}
 			else
 			{
@@ -64,6 +75,7 @@ public class WaveSpawner : MonoBehaviour
 			if (state != SpawnState.SPAWNING)
 			{
 				StartCoroutine(SpawnWave(waves[nextWave]));
+				completed = false;
 			}
 		}
 		else
@@ -85,6 +97,9 @@ public class WaveSpawner : MonoBehaviour
 		{
 			nextWave++;
 		}
+
+		CompletedText.active = true;
+		WaveText.active = true;
 	}
 
 	bool EnemyIsAlive()
@@ -104,15 +119,15 @@ public class WaveSpawner : MonoBehaviour
 	IEnumerator SpawnWave(Wave _wave)
 	{
 		state = SpawnState.SPAWNING;
+
+		WaveText.GetComponent<TextMeshProUGUI>().SetText("Wave " + (nextWave + 1));
+
 		for (int i = 0; i < _wave.count.Length; i++)
 		{
 			int tempenemytype = i;
 
-			if (i == _wave.count.Length)
-			{
-			}
 
-				for (int x = 0; x < _wave.count[tempenemytype]; x++)
+			for (int x = 0; x < _wave.count[tempenemytype]; x++)
 			{
 				SpawnEnemy(_wave.enemy[tempenemytype]);
 				yield return new WaitForSeconds(1f / _wave.rate);
