@@ -14,15 +14,16 @@ public class WeaponSlecetSc : MonoBehaviour
     public GameObject AutoShotgun;
     public GameObject SemiAutoShotgun;
 
-    private GameObject CurrentWeapon;
+    public GameObject CurrentWeapon;
+
     void Start()
     {
-
     }
 
     void Update()
     {
         CurrentWeapon = GameObject.FindGameObjectWithTag("Weapon");
+        //Pistol
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Destroy(CurrentWeapon);
@@ -30,14 +31,16 @@ public class WeaponSlecetSc : MonoBehaviour
             {
                 CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, Quaternion.identity);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Pistol";
             }
             else
             {
                 CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Pistol";
             }
         }
-
+        //Uzi
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Destroy(CurrentWeapon);
@@ -45,14 +48,15 @@ public class WeaponSlecetSc : MonoBehaviour
             {
                 CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, Quaternion.identity);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Uzi";
             }
             else
             {
                 CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Uzi";
             }
-
-
+            //Shotgun
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 Destroy(CurrentWeapon);
@@ -60,11 +64,13 @@ public class WeaponSlecetSc : MonoBehaviour
                 {
                     CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, Quaternion.identity);
                     CurrentWeapon.transform.SetParent(gameObject.transform);
+                    CurrentWeapon.gameObject.name = "Shotgun";
                 }
                 else
                 {
                     CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
                     CurrentWeapon.transform.SetParent(gameObject.transform);
+                    CurrentWeapon.gameObject.name = "Shotgun";
                 }
             }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShootingSc : MonoBehaviour
 {
+    public ReloadSc ReloadSc;
+
     public GameObject Bullet;
 
     public Transform BulletSpawnPoint;
@@ -12,28 +14,41 @@ public class ShootingSc : MonoBehaviour
 
     public int DamageTemp;
 
+    void Start()
+    {
+        ReloadSc = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<ReloadSc>();
+    }
+
     void Update()
     {
-        if (gameObject.name == "Pistol(Clone)")
+        if (gameObject.name == "Pistol")
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                GameObject BulletClone =  Instantiate(Bullet, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-                DamageTemp = 10;
-                BulletClone.GetComponent<BulletSc>().Damage = DamageTemp;
+                if (ReloadSc.ClipEmpty == false)
+                {
+                    GameObject BulletClone = Instantiate(Bullet, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
+                    DamageTemp = 10;
+                    BulletClone.GetComponent<BulletSc>().Damage = DamageTemp;
+                    ReloadSc.CurrentBulletC--;
+                }
             }
         }
-        if (gameObject.name == "Uzi(Clone)")
+        if (gameObject.name == "Uzi")
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                UziShootingInterval -= Time.deltaTime;
-                if (UziShootingInterval <= 0)
+                if (ReloadSc.ClipEmpty == false)
                 {
-                    GameObject BulletClone = Instantiate(Bullet, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-                    UziShootingInterval = 0.2f;
-                    DamageTemp = 5;
-                    BulletClone.GetComponent<BulletSc>().Damage = DamageTemp;
+                    UziShootingInterval -= Time.deltaTime;
+                    if (UziShootingInterval <= 0)
+                    {
+                        GameObject BulletClone = Instantiate(Bullet, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
+                        UziShootingInterval = 0.2f;
+                        DamageTemp = 5;
+                        BulletClone.GetComponent<BulletSc>().Damage = DamageTemp;
+                        ReloadSc.CurrentBulletC--;
+                    }
                 }
             }
         }

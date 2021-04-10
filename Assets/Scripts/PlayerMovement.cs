@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * MovementSpeed * Time.deltaTime);
     }
 
-    public void GetDamaged()s
+    public void GetDamaged()
     {
         Health--;
     }
