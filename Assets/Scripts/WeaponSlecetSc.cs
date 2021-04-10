@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSlecetSc : MonoBehaviour
 {
+    public ReloadSc reloadSc;
+
     public Transform WeaponSpwanPoint;
 
     public GameObject Pistol;
@@ -18,6 +20,7 @@ public class WeaponSlecetSc : MonoBehaviour
 
     void Start()
     {
+        reloadSc = gameObject.GetComponent<ReloadSc>();
     }
 
     void Update()
@@ -32,12 +35,14 @@ public class WeaponSlecetSc : MonoBehaviour
                 CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, Quaternion.identity);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
                 CurrentWeapon.gameObject.name = "Pistol";
+                reloadSc.CurrentBulletC = reloadSc.LastPistolBC;
             }
             else
             {
                 CurrentWeapon = Instantiate(Pistol, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
                 CurrentWeapon.gameObject.name = "Pistol";
+                reloadSc.CurrentBulletC = reloadSc.LastPistolBC;
             }
         }
         //Uzi
@@ -49,29 +54,14 @@ public class WeaponSlecetSc : MonoBehaviour
                 CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, Quaternion.identity);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
                 CurrentWeapon.gameObject.name = "Uzi";
+                reloadSc.CurrentBulletC = reloadSc.LastUziBC;
             }
             else
             {
                 CurrentWeapon = Instantiate(Uzi, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
                 CurrentWeapon.transform.SetParent(gameObject.transform);
                 CurrentWeapon.gameObject.name = "Uzi";
-            }
-            //Shotgun
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Destroy(CurrentWeapon);
-                if (CurrentWeapon == null)
-                {
-                    CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, Quaternion.identity);
-                    CurrentWeapon.transform.SetParent(gameObject.transform);
-                    CurrentWeapon.gameObject.name = "Shotgun";
-                }
-                else
-                {
-                    CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
-                    CurrentWeapon.transform.SetParent(gameObject.transform);
-                    CurrentWeapon.gameObject.name = "Shotgun";
-                }
+                reloadSc.CurrentBulletC = reloadSc.LastUziBC;
             }
 
             CurrentWeapon.transform.SetParent(gameObject.transform);
@@ -79,6 +69,25 @@ public class WeaponSlecetSc : MonoBehaviour
             if (CurrentWeapon != null)
             {
                 CurrentWeapon.transform.SetParent(gameObject.transform);
+            }
+        }
+        //Shotgun
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Destroy(CurrentWeapon);
+            if (CurrentWeapon == null)
+            {
+                CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, Quaternion.identity);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Shotgun";
+                reloadSc.CurrentBulletC = reloadSc.LastShotgunBC;
+            }
+            else
+            {
+                CurrentWeapon = Instantiate(Shotgun, WeaponSpwanPoint.position, WeaponSpwanPoint.rotation);
+                CurrentWeapon.transform.SetParent(gameObject.transform);
+                CurrentWeapon.gameObject.name = "Shotgun";
+                reloadSc.CurrentBulletC = reloadSc.LastShotgunBC;
             }
         }
     }

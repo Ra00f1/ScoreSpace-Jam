@@ -14,6 +14,10 @@ public class ReloadSc : MonoBehaviour
     public int UziBC;
     public int ShotgunBC;
 
+    public int LastPistolBC;
+    public int LastUziBC;
+    public int LastShotgunBC;
+
     public int CurrentBulletC;
     public int CurrentMaxBulletC;
 
@@ -30,6 +34,7 @@ public class ReloadSc : MonoBehaviour
         CheckWeapon();
         Reload();
         SetText();
+        RemainingBullets();
     }
 
     private void CheckWeapon()
@@ -85,6 +90,22 @@ public class ReloadSc : MonoBehaviour
             {
                 CurrentBulletC = CurrentMaxBulletC;
             }
+        }
+    }
+
+    private void RemainingBullets()
+    {
+        if (WeaponSlecetSc.CurrentWeapon.name == "Pistol")
+        {
+            LastPistolBC = CurrentBulletC;
+        }
+        if (WeaponSlecetSc.CurrentWeapon.name == "Uzi")
+        {
+            LastUziBC = CurrentBulletC;
+        }
+        if (WeaponSlecetSc.CurrentWeapon.name == "Shotgun")
+        {
+            LastShotgunBC = CurrentBulletC;
         }
     }
 }
