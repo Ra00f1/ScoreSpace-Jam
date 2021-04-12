@@ -9,6 +9,7 @@ public class ReloadSc : MonoBehaviour
     public WeaponSlecetSc WeaponSlecetSc;
 
     public TextMeshProUGUI BulletCountText;
+    public Slider Slider;
 
     public int PistolBC;
     public int UziBC;
@@ -23,6 +24,7 @@ public class ReloadSc : MonoBehaviour
 
     public bool ReloadReady;
     public bool ClipEmpty;
+    public bool Reloading = false;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class ReloadSc : MonoBehaviour
         CheckWeapon();
         Reload();
         SetText();
+        SetSlider();
         RemainingBullets();
     }
 
@@ -82,15 +85,50 @@ public class ReloadSc : MonoBehaviour
         BulletCountText.SetText(CurrentBulletC + "/" + CurrentMaxBulletC);
     }
 
+    private void SetSlider()
+    {
+        if (Reloading == false)
+        {
+            Slider.maxValue = CurrentMaxBulletC;
+            Slider.value = CurrentBulletC;
+        }
+        if (Reloading == true)
+        {
+             InvokeRepeating("ReloadAnimation", 0f, 0.5f);
+            //CurrentBulletC = CurrentMaxBulletC;
+            Reloading = false;
+        }
+    }
+
     private void Reload()
     {
         if (ReloadReady == true)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Reloading == false)
             {
-                CurrentBulletC = CurrentMaxBulletC;
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Reloading = true;
+                }
             }
         }
+    }
+
+    private void ReloadShotgun()
+    {
+        if (CurrentBulletC < CurrentMaxBulletC)
+        {
+            CurrentBulletC += 1;
+        }
+        if (CurrentBulletC == CurrentMaxBulletC)
+        {
+            CancelInvoke();
+        }
+    }
+
+    private void ReloadClip()
+    { 
+        
     }
 
     private void RemainingBullets()

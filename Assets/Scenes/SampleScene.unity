@@ -1640,6 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095801ce8053314787a28cee99e3a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reloadSc: {fileID: 0}
   WeaponSpwanPoint: {fileID: 452496912}
   Pistol: {fileID: 3447093887607015819, guid: 1392ce294894cf94f96ae791025d6cdf, type: 3}
   Uzi: {fileID: 6930942699803128116, guid: 5b4d87bf13484084da3f8abe302a0895, type: 3}
@@ -1679,13 +1680,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponSlecetSc: {fileID: 0}
   BulletCountText: {fileID: 471988575}
+  Slider: {fileID: 1662866548}
   PistolBC: 7
   UziBC: 20
   ShotgunBC: 0
+  LastPistolBC: 0
+  LastUziBC: 0
+  LastShotgunBC: 0
   CurrentBulletC: 0
   CurrentMaxBulletC: 0
   ReloadReady: 0
   ClipEmpty: 0
+  Reloading: 0
 --- !u!1 &961157599
 GameObject:
   m_ObjectHideFlags: 0
