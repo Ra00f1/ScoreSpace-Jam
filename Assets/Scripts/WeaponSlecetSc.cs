@@ -18,6 +18,8 @@ public class WeaponSlecetSc : MonoBehaviour
 
     public GameObject CurrentWeapon;
 
+    public bool ShotgunReload;
+
     void Start()
     {
         reloadSc = gameObject.GetComponent<ReloadSc>();
@@ -44,6 +46,7 @@ public class WeaponSlecetSc : MonoBehaviour
                 CurrentWeapon.gameObject.name = "Pistol";
                 reloadSc.CurrentBulletC = reloadSc.LastPistolBC;
             }
+            ShotgunReload = false;
         }
         //Uzi
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -70,6 +73,7 @@ public class WeaponSlecetSc : MonoBehaviour
             {
                 CurrentWeapon.transform.SetParent(gameObject.transform);
             }
+            ShotgunReload = false;
         }
         //Shotgun
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -89,6 +93,7 @@ public class WeaponSlecetSc : MonoBehaviour
                 CurrentWeapon.gameObject.name = "Shotgun";
                 reloadSc.CurrentBulletC = reloadSc.LastShotgunBC;
             }
+            ShotgunReload = true;
         }
     }
 }

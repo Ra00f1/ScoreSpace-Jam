@@ -94,9 +94,16 @@ public class ReloadSc : MonoBehaviour
         }
         if (Reloading == true)
         {
-             InvokeRepeating("ReloadAnimation", 0f, 0.5f);
-            //CurrentBulletC = CurrentMaxBulletC;
-            Reloading = false;
+            if (WeaponSlecetSc.ShotgunReload == true)
+            {
+                InvokeRepeating("ReloadShotgun", 0f, 0.5f);
+                Reloading = false;
+            }
+            if (WeaponSlecetSc.ShotgunReload == false)
+            {
+                ReloadClip();
+                Reloading = false;
+            }
         }
     }
 
@@ -127,8 +134,8 @@ public class ReloadSc : MonoBehaviour
     }
 
     private void ReloadClip()
-    { 
-        
+    {
+        CurrentBulletC = CurrentMaxBulletC;
     }
 
     private void RemainingBullets()
